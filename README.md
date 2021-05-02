@@ -1,2 +1,2 @@
 # Super-Trunfo
- Jogo super trunfo, criado durante a imersão dev .
+ Jogo super trunfo, criado durante a Imersão Dev .

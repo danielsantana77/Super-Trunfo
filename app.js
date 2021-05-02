@@ -138,12 +138,15 @@ function exibeCartaJogador() {
 }
 
 function obtemAtributoSelecionado() {
+
     var radioAtributo = document.getElementsByName('atributo')
+    
     for (var i = 0; i < radioAtributo.length; i++) {
         if (radioAtributo[i].checked) {
             return radioAtributo[i].value
         }
     }
+    return false;
 }
 
 function jogar() {
@@ -153,6 +156,11 @@ function jogar() {
   
     var divResultado = document.getElementById("resultado")
     var atributoSelecionado = obtemAtributoSelecionado()
+
+    if(atributoSelecionado == false){
+        alert("Escolha o Atributo para Jogar !!")
+        return;
+    }
 
     if (cartaJogador.atributos[atributoSelecionado] > cartaMaquina.atributos[atributoSelecionado]) {
         htmlResultado = '<p class="resultado-final">Venceu</p>'
