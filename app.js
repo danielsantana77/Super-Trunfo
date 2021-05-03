@@ -81,6 +81,7 @@ var cartaMarvel = {
 var cartaMaquina
 var cartaJogador
 var cartas = [cartaPaulo, cartaRafa, cartaGui, cartaLol, cartaNaruto, cartaHarry, cartaBatman, cartaMarvel]
+var cartasRemovidas = []
 //            0           1           2          3         4            5            6           7     
 
 var pontosJogador = 0
@@ -104,12 +105,15 @@ function sortearCarta() {
     
   
     var numeroCartaMaquina = parseInt(Math.random() * cartas.length)
-    cartaMaquina = cartas[numeroCartaMaquina]
-    
+    cartaMaquina = cartas[numeroCartaMaquina]    
+    cartasRemovidas.push(cartaMaquina)
     cartas.splice(numeroCartaMaquina,1)
+
+
     
     var numeroCartaJogador = parseInt(Math.random() * cartas.length)    
     cartaJogador = cartas[numeroCartaJogador]
+    cartasRemovidas.push(cartaJogador)
     cartas.splice(numeroCartaJogador,1)
    
 
@@ -122,6 +126,7 @@ function sortearCarta() {
 
 
 function exibeCartaJogador() {
+   
     var divCartaJogador = document.getElementById("carta-jogador")
     var moldura = '<img src="https://www.alura.com.br/assets/img/imersoes/dev-2021/card-super-trunfo-transparent.png" style=" width: inherit; height: inherit; position: absolute;">';
     divCartaJogador.style.backgroundImage = `url(${cartaJogador.imagem})`
@@ -174,7 +179,15 @@ function jogar() {
     
     if(cartas.length == 0){
         
-      alert("FIM DE JOGO")
+      
+      var divBotaoSortear = document.getElementById('btnSortear');
+      var divBotaoJogarNovamente = document.getElementById('btnJogarNovamente')
+      
+      
+        alert("FIM DE JOGO")
+
+
+
       if(pontosJogador > pontosMaquina){
           htmlResultado = '<p class="resultado-final">Voce Ganhou o jogo !!</p>'
       }else if (pontosJogador < pontosMaquina){
@@ -182,7 +195,9 @@ function jogar() {
       }else {
         htmlResultado = '<p class="resultado-final">Houve Empate no jogo</p>'
       }
-      
+
+      divBotaoSortear.style.display = 'none'
+      divBotaoJogarNovamente.style.display = 'block'
       
       
     }else{  
@@ -239,4 +254,31 @@ function proximaRodada(){
   
     var divResultado = document.getElementById('resultado')
     divResultado.innerHTML = ""
+}
+
+
+// Função que limpa os campos das cartas, atribui o array de cartas Removidas a variavel cartas
+// reniciando o jogo
+
+function jogarNovamente(){
+
+    var divBotaoSortear = document.getElementById('btnSortear');
+    var divBotaoJogarNovamente = document.getElementById('btnJogarNovamente')
+    var divResultado = document.getElementById('resultado')
+    var divCartas = document.getElementById('cartas')
+    
+    divCartas.innerHTML = `<div id="carta-jogador" class="carta"> </div> <div id = "carta-maquina" class = "carta"> </div>`
+
+    console.log(cartas);
+    console.log(cartasRemovidas)
+
+    cartas = cartasRemovidas;
+    cartasRemovidas = []
+    divBotaoSortear.style.display = 'block'
+    divBotaoSortear.disabled = false;
+    divBotaoJogarNovamente.style.display = 'none'
+
+    divResultado.innerHTML = ""
+    
+    
 }
