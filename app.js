@@ -232,6 +232,7 @@ function exibeCartaMaquina() {
 
     divCartaMaquina.innerHTML = moldura + nome + html + opcoesTexto + '</div>'
 }
+
 function atualizaQuantidadeDeCartas(){
   
     var divQuantidadeCartas = document.getElementById('quantidade-cartas')
@@ -239,7 +240,7 @@ function atualizaQuantidadeDeCartas(){
     
     divQuantidadeCartas.innerHTML = html
     
-  }
+}
 
 
 function proximaRodada(){
